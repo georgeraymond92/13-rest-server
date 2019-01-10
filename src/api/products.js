@@ -22,6 +22,7 @@ function getProducts(request,response,next) {
     .then( data => {
       const output = {
         count: data.length,
+        // might be wrong
         results: data,
       };
       response.status(200).json(output);
