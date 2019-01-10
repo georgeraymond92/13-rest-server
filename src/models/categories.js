@@ -1,20 +1,29 @@
 'use strict';
+const categoriesModel = require('./categories-schema');
 
 class Categories {
 
   constructor() {
   }
 
-  get(_id) {
+  get(id) {
+    let queryObject = id ? {_id:id} : {};
+    return categoriesModel.find(queryObject);
+
   }
   
-  post(record) {
+  post(entry) {
+    let newRecord = new categoriesModel(entry);
+    return newRecord.save()
   }
 
-  put(_id, record) {
+  put(id, entry) {
+    return categoriesModel.findOneAndUpdate( { _id: id}, { $set: entry }, { new: true });
+
   }
 
-  delete(_id) {
+  delete(id) {
+    return categoriesModel.findOneAndRemove( { _id: id} );
   }
 
 }
